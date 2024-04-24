@@ -1,12 +1,10 @@
 import React from "react";
-import { Conatiner, Logo, LogoutBtn } from "../index";
+import { Container, Logo, LogoutBtn } from "../index.js";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Header = () => {
-  const authStatus = useSelector((state) => {
-    state.auth.state;
-  });
+  const authStatus = useSelector((state) => state.auth.state);
   const navigate = useNavigate();
 
   const navItems = [
@@ -17,33 +15,39 @@ const Header = () => {
     { name: "Add Post", slug: "/add-post", active: authStatus },
   ];
 
-  return <>
-  <header>
-    <Conatiner>
-      <nav className="flex">
-      <div className="mr-4">
-
-        <Link to="/"><Logo width="70px" />
-        </Link>
-      </div>
-<ul>
-  {navItems.map((item)=>item.active ? (
-    <li>
-      <button onClick={()=>navigate(item.slug)} className="inline-block px-6 py-2 duration-300 hover:bg-blue-200 rounded-full">{item.name}</button>
-      
-    </li>
-  ) : null)}
-  {authStatus && (
-    <li><LogoutBtn /></li>
-  )}
-</ul>
-
-
-      </nav>
-
-    </Conatiner>
-  </header>
-  </>;
+  return (
+    <header>
+      <Container>
+        <nav className="flex">
+          <div className="mr-4">
+            <Link to="/">
+              <Logo width="70px" />
+            </Link>
+          </div>
+          <ul>
+            {navItems.map(
+              (item, index) =>
+                item.active && (
+                  <li key={index}>
+                    <button
+                      onClick={() => navigate(item.slug)}
+                      className="inline-block px-6 py-2 duration-300 hover:bg-blue-200 rounded-full"
+                    >
+                      {item.name}
+                    </button>
+                  </li>
+                )
+            )}
+            {authStatus && (
+              <li>
+                <LogoutBtn />
+              </li>
+            )}
+          </ul>
+        </nav>
+      </Container>
+    </header>
+  );
 };
 
 export default Header;

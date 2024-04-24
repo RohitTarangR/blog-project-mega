@@ -48,7 +48,7 @@ const Login = () => {
             Sign Up
           </Link>
         </p>
-          {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
+        {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
         <form onSubmit={handleSubmit(login)} className="mt-8">
           <div className="space-y-5">
             <Input
@@ -58,17 +58,30 @@ const Login = () => {
               {...register("email", {
                 required: true,
                 validate: {
-                  matchPatern: (value) => /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g. test(value) || "Email address must be valid address !"
+                  matchPatern: (value) =>
+                    /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g.test(
+                      value
+                    ) || "Email address must be valid address !",
                 },
               })}
             />
-            <Input label="Password: " type="password" placeholder="Enter your password" {...register, ("password",{
-              required: true,
-              validate:{
-                matchPatern: (value)=> /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm. test(value) || "Enter Strong Password !"
-              }
-            })} />
-            <button type="submit" className="w-full">Sign In</button>
+            <Input
+              label="Password: "
+              type="password"
+              placeholder="Enter your password"
+              {...register("password", {
+                required: true,
+                validate: {
+                  matchPatern: (value) =>
+                    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm.test(
+                      value
+                    ) || "Enter Strong Password !",
+                },
+              })}
+            />
+            <button type="submit" className="w-full">
+              Sign In
+            </button>
           </div>
         </form>
       </div>

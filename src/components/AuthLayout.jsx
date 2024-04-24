@@ -20,4 +20,4 @@ const Protected = ({children,authentication = true}) => {
 
 
 
-export default AuthLayout
+export default Protected

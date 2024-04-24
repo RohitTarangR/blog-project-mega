@@ -53,12 +53,12 @@ const Signup = () => {
           </p>
             {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
             <form onSubmit={handleSubmit(create)}>
-              <Input label="Full Name: " placeholder="Enter Your Name" type="text" {...register,("name",{required: true})}  />
+              <Input label="Full Name: " placeholder="Enter Your Name" type="text" {...register("name",{required: true})}  />
               <Input label="Email : " type="email" placeholder="Enter Your Email" {...register("email", {required: true, validate: {matchPatern: (value) => /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g. test(value) || "Email address must be valid address !"
                 },
               })}
             />
-            <Input label="Password: " type="password" placeholder="Enter your password" {...register, ("password",{
+            <Input label="Password: " type="password" placeholder="Enter your password" {...register("password",{
               required: true,
               validate:{
                 matchPatern: (value)=> /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm. test(value) || "Enter Strong Password !"
